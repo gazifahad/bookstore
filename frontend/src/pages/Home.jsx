@@ -24,7 +24,7 @@ export const Home = () => {
         setLoading(false);
       });
   }, []);
-  console.log(books);
+  //   console.log(books);
 
   return (
     <div className="p-4 ">
