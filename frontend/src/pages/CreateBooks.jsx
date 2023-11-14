@@ -3,6 +3,7 @@ import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import BackButton from "../components/BackButton";
 import Spinner from "../components/spinner";
+import { useSnackbar } from "notistack";
 
 export const CreateBooks = () => {
   const [title, setTtitle] = useState("");
@@ -10,6 +11,7 @@ export const CreateBooks = () => {
   const [publishYear, setPublishYear] = useState("");
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
+  const { enqueueSnackbar } = useSnackbar();
   const handleSaveBook = () => {
     try {
       const data = {
@@ -23,11 +25,13 @@ export const CreateBooks = () => {
 
         .then(() => {
           setLoading(false);
+          enqueueSnackbar("Book Created Successfully", { variant: "success" });
           navigate("/");
         });
     } catch (error) {
       setLoading(false);
-      alert("an error occured ,please check the console");
+      // alert("an error occured ,please check the console");
+      enqueueSnackbar("error", { variant: "error" });
       console.log(error);
     }
   };
